@@ -479,6 +479,20 @@ To see the integration test coverage report open `.coverage/integration/lcov-rep
   open .coverage/integration/lcov-report/index.html
   ```
 
+## Public endpoints
+
+### Admission check
+Endpoint used to externally check whether particular `pubkey` is admitted.
+
+`GET` `/admissions/check/:pubkey`
+
+Response:
+```
+{
+  "userAdmitted": boolean
+}
+```
+
 ## Configuration
 
 You can change the default folder by setting the `NOSTR_CONFIG_DIR` environment variable to a different path.
