@@ -13,10 +13,17 @@ export class GetSubmissionCheckController implements IController {
     const currentSettings = this.settings()
     
     const pubkey = request.params.pubkey
+    // Find a user based on the parameter provided pubkey
     const user = await this.userRepository.findByPubkey(pubkey)
-
+    
     let userAdmitted = false
 
+    /**
+     * Returned true only if:
+     *  User is found
+     *  User is admitted
+     *  Minimum balanace required is paid or no minimum balance set
+     */
     const minBalance = currentSettings.limits?.event?.pubkey?.minBalance
     if (user && user.isAdmitted && (!minBalance || user.balance >= minBalance)) {
       userAdmitted = true
